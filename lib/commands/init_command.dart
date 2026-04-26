@@ -12,7 +12,7 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.instance;
 
 void setupDI() {
-  // @mycli-di-insert
+  // @provider_cli-di-insert
 }
 ''');
 
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // @mycli-provider-insert
+        // @provider_cli-provider-insert
       ],
       child: MaterialApp(
         home: const Scaffold(),

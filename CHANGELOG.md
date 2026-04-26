@@ -1,3 +1,6 @@
-## 1.0.0
+## 0.0.1
 
-- Initial version.
+- Initial release
+- Feature generator
+- Provider integration
+- DI setup

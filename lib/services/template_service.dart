@@ -1,5 +1,6 @@
 import 'dart:io';
 
+/// Handles template rendering with placeholder replacement
 class TemplateService {
   static String render(String templatePath, Map<String, String> values) {
     final file = File(templatePath);

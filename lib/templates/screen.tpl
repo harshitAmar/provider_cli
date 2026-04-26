@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// UI screen for {{name}} module.
 class {{name}}Screen extends StatelessWidget {
   const {{name}}Screen({super.key});
 
@@ -7,7 +8,9 @@ class {{name}}Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('{{name}}')),
-      body: const Center(child: Text('{{name}} Screen')),
+      body: const Center(
+        child: Text('{{name}} Screen'),
+      ),
     );
   }
 }

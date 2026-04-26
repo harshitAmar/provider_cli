@@ -4,20 +4,24 @@ import '../services/file_service.dart';
 import '../services/naming_service.dart';
 import '../services/template_service.dart';
 
+/// Generates a full module with clean architecture
+/// Structure:
+/// - view (screens + widgets)
+/// - data (model, repository, implementation)
+/// - controller (state management)
 void runCreateFeature(String name) {
   final pascal = toPascalCase(name);
   final base = 'lib/modules/$name';
 
-  /// 📁 Create folders
+  /// 📁 Create directory structure
   Directory('$base/view/screens').createSync(recursive: true);
   Directory('$base/view/widgets').createSync(recursive: true);
   Directory('$base/data/model').createSync(recursive: true);
   Directory('$base/data/repository').createSync(recursive: true);
-  Directory('$base/data/impl').createSync(recursive: true);
+  Directory('$base/data/implementation').createSync(recursive: true);
   Directory('$base/controller').createSync(recursive: true);
 
-  /// 📄 Generate files using templates
-
+  /// 📄 Generate files from templates
   createFile(
     '$base/view/screens/${name}_screen.dart',
     TemplateService.render('lib/templates/screen.tpl', {'name': pascal}),
@@ -39,29 +43,27 @@ void runCreateFeature(String name) {
   );
 
   createFile(
-    '$base/data/impl/${name}_impl.dart',
+    '$base/data/implementation/${name}_repository_impl.dart',
     TemplateService.render('lib/templates/impl.tpl', {
       'name': pascal,
       'file_name': name,
     }),
   );
 
-  /// 🔌 Insert Provider
-
+  /// 🔌 Inject into MultiProvider
   insertIntoFile(
     filePath: 'lib/main.dart',
-    marker: '// @mycli-provider-insert',
+    marker: '// @provider_cli-provider-insert',
     content: 'ChangeNotifierProvider(create: (_) => ${pascal}Controller()),',
   );
 
-  /// 🔌 Insert DI
-
+  /// 🔌 Register in DI container
   insertIntoFile(
     filePath: 'lib/core/di/injection.dart',
-    marker: '// @mycli-di-insert',
+    marker: '// @provider_cli-di-insert',
     content:
         'getIt.registerLazySingleton<${pascal}Repository>(() => ${pascal}RepositoryImpl());',
   );
 
-  print('Feature $name created successfully');
+  print('✅ Feature "$name" created successfully');
 }
