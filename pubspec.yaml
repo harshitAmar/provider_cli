@@ -1,6 +1,6 @@
 name: provider_cli
 description: A production-ready Flutter architecture generator CLI with Provider, DI, and modular structure.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/harshitamar/provider_cli
 repository: https://github.com/harshitamar/provider_cli
 issue_tracker: https://github.com/yourusername/provider_cli/issues

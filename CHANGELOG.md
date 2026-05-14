@@ -1,5 +1,17 @@
 # Changelog
 
+
+## 0.0.3
+
+### Added
+- VS Code extension compatibility
+- Automatic CLI installation support
+- `--version` command support
+
+### Improved
+- Better CLI detection workflow
+- Improved extension integration
+
 ## 0.0.2
 
 ### Added
