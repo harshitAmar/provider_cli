@@ -6,7 +6,6 @@ import 'commands/init_command.dart';
 /// Entry point for CLI logic
 void runCLI(List<String> args) {
   final parser = ArgParser();
-
   parser.addCommand('init');
   parser.addCommand('create');
 

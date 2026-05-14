@@ -1,182 +1,252 @@
-# 🚀 provider_cli
+# Provider CLI
 
-A **production-ready Flutter CLI** to generate scalable architecture using **Provider, Repository pattern, and Dependency Injection**.
+🚀 A powerful Flutter CLI tool to generate scalable clean architecture with **Provider**, **GetIt**, and optional routing support using **GoRouter** or Flutter's default named navigation.
 
----
-
-## ✨ Features
-
-* ⚡ Generate complete feature modules instantly
-* 🧱 Clean architecture (View + Controller + Data)
-* 🔌 Built-in **Provider** state management
-* 🧩 Repository + Implementation pattern
-* 🧠 Dependency Injection using **get_it**
-* 🛠 Template-based generation (extensible)
-* 🧬 Modular and scalable structure
+Designed to eliminate repetitive setup and speed up Flutter development with production-ready architecture.
 
 ---
 
-## 📦 Installation
+# ✨ Features
+
+✅ Clean Architecture Feature Generator
+✅ Provider State Management Integration
+✅ GetIt Dependency Injection Setup
+✅ Automatic Route Registration
+✅ GoRouter Support
+✅ Flutter Named Route Support
+✅ Auto Controller Injection
+✅ Auto Repository Injection
+✅ Auto Implementation Injection
+✅ Modular Feature-Based Structure
+✅ Dynamic File Generation using Templates
+✅ Scalable Marker-Based Code Injection
+✅ Global CLI Support
+✅ Zero Manual Boilerplate Setup
+
+---
+
+# 📦 Installation
+
+Activate globally from pub.dev:
 
 ```bash
 dart pub global activate provider_cli
 ```
 
+Or activate locally during development:
+
+```bash
+dart pub global activate --source path .
+```
+
 ---
 
-## 🚀 Usage
+# 🚀 Initialize Project
 
-### Initialize your project
+Run:
 
 ```bash
 provider_cli init
 ```
 
-✔ Sets up:
+The CLI will automatically ask:
 
-* MultiProvider in `main.dart`
-* DI container (`get_it`)
-* Required markers for safe code injection
+```text
+Do you want to setup named routing? (y/n)
+```
+
+If yes:
+
+```text
+1. GoRouter
+2. Flutter Default Navigator
+```
+
+The CLI automatically:
+
+* Adds dependencies
+* Creates DI setup
+* Creates route setup
+* Updates `main.dart`
+* Adds scalable injection markers
 
 ---
 
-### Create a feature
+# 🏗 Generate Feature
+
+Create a new feature/module:
 
 ```bash
-provider_cli create feature auth
+provider_cli create feature home
 ```
 
-✔ Generates:
+Automatically generates:
 
+```text
+lib/
+└── modules/
+    └── home/
+        ├── controller/
+        │   └── home_controller.dart
+        │
+        ├── data/
+        │   ├── implementation/
+        │   │   └── home_repository_impl.dart
+        │   │
+        │   ├── model/
+        │   │   └── home_model.dart
+        │   │
+        │   └── repository/
+        │       └── home_repository.dart
+        │
+        └── view/
+            ├── screens/
+            │   └── home_screen.dart
+            │
+            └── widgets/
 ```
-lib/modules/auth/
-├── view/
-│   ├── screens/
-│   │   └── auth_screen.dart
-│   └── widgets/
-│
-├── data/
-│   ├── model/
-│   │   └── auth_model.dart
-│   ├── repository/
-│   │   └── auth_repository.dart
-│   └── implementation/
-│       └── auth_repository_impl.dart
-│
-└── controller/
-    └── auth_controller.dart
-```
-
-✔ Also:
-
-* Adds controller to `MultiProvider`
-* Registers repository in DI
 
 ---
 
-## 🧱 Architecture
+# ⚡ Automatic Integrations
 
-Each module follows:
+## ✅ Provider Injection
 
-### 🔹 View
-
-* Screens (UI)
-* Widgets
-
-### 🔹 Controller
-
-* Handles business logic
-* Uses `ChangeNotifier` (Provider)
-
-### 🔹 Data
-
-* Model → Data structure
-* Repository → Abstract contract
-* Implementation → Concrete logic
-
----
-
-## 🔌 Dependency Injection
-
-Uses `get_it` for managing dependencies:
+Automatically adds:
 
 ```dart
-getIt.registerLazySingleton<AuthRepository>(
-  () => AuthRepositoryImpl(),
+ChangeNotifierProvider(
+  create: (_) => HomeController(),
+),
+```
+
+inside:
+
+```dart
+MultiProvider()
+```
+
+---
+
+## ✅ Dependency Injection
+
+Automatically registers:
+
+```dart
+getIt.registerLazySingleton<HomeRepository>(
+  () => HomeRepositoryImpl(),
 );
 ```
 
 ---
 
-## 🧠 Example Generated Code
+## ✅ Auto Imports
 
-### Controller
+Automatically injects imports for:
+
+* Controllers
+* Repositories
+* Implementations
+* Screens
+* Routes
+
+---
+
+# 🛣 Routing Support
+
+## GoRouter
+
+Automatically adds:
 
 ```dart
-class AuthController extends ChangeNotifier {}
+GoRoute(
+  path: '/home',
+  name: 'home',
+  builder: (context, state) => const HomeScreen(),
+),
 ```
 
-### Repository
+---
+
+## Flutter Named Routes
+
+Automatically adds:
 
 ```dart
-abstract class AuthRepository {}
+'/home': (context) => const HomeScreen(),
 ```
 
-### Implementation
+---
+
+# 🧠 Smart Marker-Based Injection System
+
+Provider CLI uses scalable code markers like:
 
 ```dart
-class AuthRepositoryImpl implements AuthRepository {}
+// @provider_cli-provider-insert
+// @provider_cli-di-import
+// @provider_cli-go-route-insert
+```
+
+This allows safe and repeatable automatic code generation without breaking existing code.
+
+---
+
+# 📁 Generated Core Structure
+
+## DI
+
+```text
+lib/core/di/injection.dart
+```
+
+## Routes
+
+```text
+lib/core/routes/app_routes.dart
 ```
 
 ---
 
-## ⚙️ CLI Commands
+# 🛠 Tech Stack
 
-| Command                       | Description              |
-| ----------------------------- | ------------------------ |
-| `provider_cli init`                  | Initialize project setup |
-| `provider_cli create feature <name>` | Generate new module      |
-
----
-
-## 📁 Project Structure
-
-```
-lib/
- └── modules/
-      └── feature_name/
-           ├── view/
-           ├── data/
-           └── controller/
-```
+* Flutter
+* Provider
+* GetIt
+* GoRouter
+* Dart CLI
 
 ---
 
-## 🛡 Safety Features
+# 📌 Upcoming Features
 
-* ✅ No file overwrite
-* ✅ Marker-based safe injection
-* ✅ Duplicate protection
-
----
-
-## 🔮 Roadmap
-
-* [ ] Router support (Navigator + go_router)
-* [ ] Config file (`provider_cli.yaml`)
-* [ ] API layer (Dio / HTTP)
-* [ ] VS Code extension
-* [ ] UI kit generation
+* Networking Generator
+* API Service Generator
+* Bloc Support
+* Riverpod Support
+* Theme Generator
+* Localization Generator
+* Environment Configuration
+* Build Flavor Support
+* Firebase Setup
+* Testing Boilerplates
 
 ---
 
-## 🤝 Contributing
+# 🤝 Contributing
 
-Contributions are welcome!
-Feel free to open issues or submit pull requests.
+Contributions, issues, and feature requests are welcome.
+
+Feel free to fork the repository and submit pull requests.
 
 ---
 
-## 📜 License
+# 📄 License
 
-MIT License © 2026 Amarjeet Srivastava
+MIT License
+
+---
+
+# ⭐ Support
+
+If you found this package useful, consider giving it a star on GitHub and sharing it with the Flutter community.
